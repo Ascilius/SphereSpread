@@ -11,6 +11,7 @@ MAX_TIME = 20
 output_filename = "output.csv"
 
 
+
 # angle between vectors
 def vector_angle(v1, v2):
 	x1 = v1[0]
