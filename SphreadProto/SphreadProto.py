@@ -1,16 +1,27 @@
 import math
 import random
 
-
-
+# ---------------------------------------------------------------------------
 # inputs
-debug = False
+debug = True
 n_points = 10
 dt = 0.001 # seconds? idk
-MAX_TIME = 20
+MAX_TIME = 20.0
 output_filename = "output.csv"
 
+# ---------------------------------------------------------------------------
+# functions
 
+# print points
+def output_points(points):
+	print('\nPoints:\n#\trho\ttheta\tphi\tvr\tvth\tvp\tar\tath\tap')
+	i = 0
+	for point in points:
+		i += 1
+		print(f'{i}', end = '\t')
+		for j in range(9):
+			print(f'{round(point[j], 3)}', end = '\t')
+		print()
 
 # angle between vectors
 def vector_angle(v1, v2):
@@ -44,18 +55,29 @@ def unitize(v):
 def negate_vector(v):
 	return [v[0] * -1, v[1] * -1, v[2] * -1]
 
+# ---------------------------------------------------------------------------
+# simulation
 
-
-# simulation setup
-MAX_FRAMES = MAX_TIME / dt
+# setup
+MAX_FRAMES = int(MAX_TIME / dt)
 output_file = open(output_filename, "w")
+if debug:
+	print(f'debug:\t\t{debug}')
+	print(f'n_points:\t{n_points}')
+	print(f'dt:\t\t{dt}')
+	print(f'MAX_TIME:\t{MAX_TIME}')
+	print(f'MAX_FRAMES:\t{MAX_FRAMES}')
+	print(f'output_file:\t{output_filename}')
 
 # generation
 points = [] # [rho (should always be 1), theta, phi, vr (should always be 0), vth, vp, ar (should always be 0), ath, ap]
 
 for x in range(n_points):
 	points.append([1.0, random.random() * 2 * math.pi, random.random() * 2 * math.pi, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0])
+if debug:
+	output_points(points)
 
+"""
 # physics loop
 n = 0
 while True:
@@ -97,9 +119,11 @@ while True:
 			if debug:
 				print(f"{i} <-> {j}: {round(theta, 3)} / {round(deg, 1)} -> {round(a, 1)}")
 			"""
+"""
 			else:
 				print(f"{i} <-> {j}: {round(deg, 1)}")
 			"""
+"""
 
 			# direction calculations
 			v1 = [x1,y1,z1]
@@ -171,3 +195,4 @@ while True:
 		# v -> s
 		point[1] += point[4] * dt
 		point[2] += point[5] * dt
+"""
